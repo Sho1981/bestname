@@ -31,10 +31,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'smtp.muumuu-mail.com'
-EMAIL_HOST_USER = 's-suzuki@space-service-core.com'
+EMAIL_HOST = env.get_value('EMAIL_HOST_NAME', str)
+EMAIL_HOST_USER = env.get_value('EMAIL_HOST_USER_NAME', str)
 EMAIL_HOST_PASSWORD = env.get_value('SMTP_SECRET_KEY', str)
-EMAIL_PORT = 465
+EMAIL_PORT = env.get_value('EMAIL_PORT_NUM', int)
 EMAIL_USE_SSL = True
 
 # Application definition
