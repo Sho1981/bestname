@@ -11,16 +11,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(DEBUG=(bool,True))
+env.read_env(os.path.join(BASE_DIR,'.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5a#%^_2h_9+w71qbebqw5ub9gb$60chnq1n5j^-n8t%1hjn0ch'
+SECRET_KEY = env.get_value('DJANGO_SECRET_KEY', str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,7 +33,7 @@ ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.muumuu-mail.com'
 EMAIL_HOST_USER = 's-suzuki@space-service-core.com'
-EMAIL_HOST_PASSWORD = 'p9WOIoQD'
+EMAIL_HOST_PASSWORD = env.get_value('SMTP_SECRET_KEY', str)
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 

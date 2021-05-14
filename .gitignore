@@ -5,3 +5,4 @@ __pycache__
 myconda
 /static
 .DS_Store
+.env
