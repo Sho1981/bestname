@@ -1,0 +1,7 @@
+*.pyc
+*~
+/.vscode
+__pycache__
+myconda
+/static
+.DS_Store

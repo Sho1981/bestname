@@ -1,0 +1,137 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    診断結果-BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+    {% load widget_tweaks custum_filters_tags %}
+    {% include "./parts/lucky_parameter.html" %}
+    <div class="container">
+        <div class="row justify-content-md-center pt-5">
+            <div class="col">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="align-middle" style="width: 80px;">
+                                画数
+                            </th>
+                            <th scope="col" class="align-middle">
+                                名前に使用できる文字一覧
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for stroke, kanji_list in kanji_dict.items %}
+                    <thead>
+                        <tr>
+                            <td scope="row">
+                                <a href="/newname/kanjisearch/strokereading/{{ stroke }}_15/">
+                                    {{ stroke }}画
+                                </a>
+                            </td>
+                            <td>
+                                <div class="d-none d-sm-block">
+                                    <div class="d-flex flex-wrap">
+                                        {% if kanji_list %}
+                                            {% for kanji in kanji_list %}
+                                                {% if forloop.counter < 100 %}
+                                                    <div class="p-1">
+                                                        <a href="/newname/kanjisearch/figure/{{ kanji }}/">
+                                                            <span style="font-size:1.2rem;">{{ kanji }}</span>
+                                                        </a>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="p-1 others{{stroke}}" style="display:none;">
+                                                        <a href="/newname/kanjisearch/figure/{{ kanji }}/">
+                                                            <span style="font-size:1.2rem;">{{ kanji }}</span>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if kanji_list|length >= 100 %}
+                                            <div>
+                                                <input id="btn-dp{{stroke}}" type="button" class="btn btn-outline-info btn-sm mx-2 my-1" value="他の漢字を全て表示" onclick="clickBtn1({{stroke}})" />
+                                            </div>
+                                            {% endif %}
+                                        {% else %}
+                                            なし
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="d-block d-sm-none">
+                                    <div class="d-flex flex-wrap">
+                                        {% if kanji_list %}
+                                            {% for kanji in kanji_list %}
+                                                {% if forloop.counter < 50 %}
+                                                    <div class="p-1">
+                                                        <a href="/newname/kanjisearch/figure/{{ kanji }}/">
+                                                            <span style="font-size:1.2rem;">{{ kanji }}</span>
+                                                        </a>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="p-1 others{{stroke}}" style="display:none;">
+                                                        <a href="/newname/kanjisearch/figure/{{ kanji }}/">
+                                                            <span style="font-size:1.2rem;">{{ kanji }}</span>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if kanji_list|length >= 50 %}
+                                            <div>
+                                                <input id="btn-dp{{stroke}}" type="button" class="btn btn-outline-info btn-sm mx-2 my-1" value="他の漢字を全て表示" onclick="clickBtn1({{stroke}})" />
+                                            </div>
+                                        {% endif %}
+                                        {% else %}
+                                            なし
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    {% include "./parts/lucky_param_define_tab.html" %}
+    <script>
+        function clickBtn1(num){
+            let classname = "others"+num;
+            let btnid = "btn-dp"+num;
+            const others = document.getElementsByClassName(classname);
+            const btn = document.getElementById(btnid);
+    
+            if(others[0].style.display=="block"){
+                // noneで非表示
+                for (let i = 0; i < others.length; i++) {
+                    others[i].style.display ="none";
+                }
+                btn.value = "他の漢字を全て表示";
+            }
+            else{
+                // blockで表示
+                for (let i = 0; i < others.length; i++) {
+                    others[i].style.display ="block";
+                }
+                btn.value = "一部を非表示";
+            }
+        }
+    </script>    
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

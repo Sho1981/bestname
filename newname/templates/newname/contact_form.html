@@ -1,0 +1,36 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    Contact Us -BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+    <h3 class="subtitle">お問い合わせ</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <p>お問い合わせ内容をお送りください。</p>
+                <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">送信</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

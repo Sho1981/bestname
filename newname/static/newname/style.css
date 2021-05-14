@@ -1,0 +1,89 @@
+.jumbotron {
+    background-image: url("images/bg_kid.jpg");
+    background-size: cover;
+}
+
+.jumbotron-extend {
+    position: relative;
+    height: 80vh;
+    min-height: 200px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #ffe2e2;;
+}
+
+.tooltip-inner{
+    text-align: left;
+    background-color: #73AD21;
+    max-width: 300px;
+}
+
+.circle{
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    background:rgba(255,0,0,0);
+    border-width: thin;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    line-height: 50px;
+    font-size:1.0rem;
+}
+
+.kanji-figure{
+    font-size: 10.0em;
+    font-family: "UD デジタル 教科書体 N-R","UD Digi Kyokasho N-R", serif;
+}
+
+.kanji{
+    font-family: "UD デジタル 教科書体 N-R","UD Digi Kyokasho N-R", serif;
+}
+
+header {
+    flex-basis: 50px; /* 初期値を設定 */
+    background-color: #ffe2e2;
+}
+
+nav, 
+aside,
+footer {
+    flex-basis: 100px;
+}
+
+@media (min-width: 992px) {
+    nav, 
+    aside {
+        /* flex-basis: 250px; */
+        flex-basis: 300px;
+    }   
+}
+
+h1.subtitle, h2.subtitle, h3.subtitle, h4.subtitle, h5.subtitle, h6.subtitle {
+    border-radius: 5px;
+    color: white;
+    background-color:pink;
+    margin: .75rem .5rem;
+    padding: .5rem;
+}
+
+.bg-lightpink{
+    background-color: #fdeeee;
+}

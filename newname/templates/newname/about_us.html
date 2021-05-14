@@ -1,0 +1,94 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    Contact Us -BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h3 class="subtitle">BestNameとは</h3>
+        <p class="px-3">
+            『BestName』は、これから産まれてくる赤ちゃんの命名・名付けのための姓名判断サイトです。
+            命名・名付けだけでなく、筆名（ペンネーム）、芸名、改名をお考えの際にもご活用頂けます。<br>
+            姓名を入力しての姓名判断だけでなく、名字に合う画数や、漢字の検索など、命名・名付けに関して便利な機能を集約しています。
+            ぜひ『BestName』を使って貴方の大切な赤ちゃんに素敵なお名前をつけてあげましょう。<br>
+            他にもこんな機能を追加してほしい！などありましたら、<a href="{% url 'newname:contact_form' %}">問い合わせフォーム</a>からご連絡ください。
+        </p>
+        <h3 class="subtitle mt-5">運営元情報</h3>
+        <div class="p-3">
+            <table class="table table-bordered">      
+                <thead>
+                    <tr>
+                        <td scope="row" style="width : 10%; min-width : 75px;">
+                            運営会社
+                        </td>
+                        <td>
+                            株式会社SSC
+                        </td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td scope="row" style="width : 10%; min-width : 75px;">
+                            設立
+                        </td>
+                        <td>
+                            2018年2月
+                        </td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td scope="row" style="width : 10%; min-width : 75px;">
+                            代表
+                        </td>
+                        <td>
+                            鈴木 翔
+                        </td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td scope="row" style="width : 10%; min-width : 75px;">
+                            企業URL
+                        </td>
+                        <td>
+                            <a href="https://space-service-core.com/company/" target="_blank">https://space-service-core.com/company/</a>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <h3 class="subtitle mt-5">参考サイト</h3>
+        <div class="d-flex flex-column justify-content m-3">
+            <div class="m-1">
+                <a href="https://kanji.jitenon.jp/" target="_blank">漢字辞典オンライン</a>
+            </div>
+            <div class="m-1">
+                <a href="https://enamae.net/" target="_blank">いい名前ねっと</a>
+            </div>
+            <div class="m-1">
+                <a href="https://namaeuranai.biz/" target="_blank">姓名判断 彩</a>
+            </div>
+            <div class="m-1">
+                <a href="https://yoshimoto.cc/" target="_blank">吉元式線優の姓名判断</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

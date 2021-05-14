@@ -1,0 +1,126 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    Contact Us -BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h3 class="subtitle">姓名判断</h3>
+    <div class="m-3">
+        姓名判断では、名前がその人の「過去」、「現在」、「未来」を暗示していると考え、
+        それに基づいて『天格』、『人格』、『地格』、『外格』、『総格』の５つの運に分類します。
+    </div>
+    <div class="d-flex flex-wrap">
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">天格</h5>
+            <div class="m-2">
+            姓の総画数。祖先運。祖先から受け継いだ苗字ですので自分の力が及びません。家柄を象徴します。一般的に晩年になるほど影響力を強めるとされています。
+天格だけで吉凶は判断しませんが、姓と名の字画数の関係が姓名判断においては重要であるとされています。婚姻をすると一般的には配偶者のどちらか一方の姓を他方の姓に合わせるため、配偶者の一方は婚姻後には天格が変わるため総画も変化することになる。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">人格</h5>
+            <div class="m-2">
+                姓の最後と名の第一字を足したもの。姓と名双方の字画数を用いることから、姓名の中心、五運の中核を成します。同一の画数であっても、姓と名からどのような画数が組み合わさっているかによって、その強弱が左右されます。
+人物の内面をあらわし、家庭・仕事・結婚運、中年期の運勢に影響を与えます。具体的には、人格が吉数であれば性格面で良い影響（物事を前向きに考える、積極的に活動できる、自信にあふれる等）が現れ、逆に凶数であれば悪い影響（物事を悪く捉える、自信を喪失しやすい、他人を妬みがち等）が現れます。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">地格</h5>
+            <div class="m-2">
+                名前の合計字画数。一字名でもその人の性格をあらわします。幼少期の運勢を表し、その人の成長過程に強い影響を与えるため、「性格」、「才能」、「金運」、「適職」、「性的傾向」に関与します。『人格』が人間の内面を表象する数であるのに対し、『地格』は「他人に対する自分の印象」を表す数です。吉数であれば、他人から良い目で見られ、社交性に富む。逆に凶数であれば、他人から良い印象を受けません。上の金運や性的傾向・適職に関与するとはここから導かれる帰結です。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">外格</h5>
+            <div class="m-2">
+                総格から人格を引いた画数。（一字姓ないし、一字名が入る場合は、双方の画数の合計数。）家族や職場などの外因的要素、対人関係・社会的環境一般の運勢。
+人生は人間関係によって決まるといっても過言ではありません。他の数が吉数でも外格が凶数であれば人間関係に恵まれず、人生の実りを大きく損ねる可能性があるので注意する必要があります。逆に吉数であればよき友人・よき配偶者・よき上司・よき先輩等に恵まれます。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">総格</h5>
+            <div class="m-2">
+                姓と名の合計字画数。人生を歩むにつれて色濃くでてくるといわれ、晩年期に大きく影響を及ぼします。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">仕事運</h5>
+            <div class="m-2">
+                表面の社会運は交際関係です。内面では全ての運勢を決める程の強烈な運格となります。運勢の強弱、実社会での地位や名誉運金銭運 、対人関係引き立て度などの動向を探ります。
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-1">
+            <h5 class="subtitle">家庭運</h5>
+            <div class="m-2">
+                家庭内での幸福度や生活の基本的な行動姿勢を判断します。部下の運、親子関係、夫婦関係の判断や、未婚の場合は結婚運なども判断します
+            </div>
+        </div>
+    </div>
+    <h3 class="subtitle">霊数とは</h3>
+    <div class="m-3">
+        霊数とは、姓や名が一文字だった場合に、一文字姓であれば最初に、一文字名であれば最後に付け加える、実体はないが画数1として数える仮置きの数のことです。
+        由来は様々な説がありますが、『泉 一』のように一文字姓+一文字名の場合に外格=総格-人格が0になってしまい吉凶を判断できなくなるため、便宜上設定したという説が有力です。
+        霊数は総格以外の運勢において全て加算されます。
+    </div>
+    <h3 class="subtitle">吉凶一覧表</h3>
+    <div class="m-3">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="align-middle" style="width: 68px;">
+                        運勢
+                    </th>
+                    <th scope="col" class="align-middle">
+                        画数<br>
+                        （例：天格24画→大吉）
+                    </th>
+                </tr>
+            </thead>
+            {% for fortune, strokes in tab.items %}
+            <thead>
+                <tr>
+                    <td scope="row">
+                        {{ fortune }}
+                    </td>
+                    <td>
+                        <div class="d-none d-sm-block">
+                            <div class="d-flex flex-wrap">
+                                {% if strokes %}
+                                    {% for stroke in strokes %}
+                                        <div class="p-1">
+                                            {{ stroke }}画{% if not forloop.last %}、{% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    なし
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}
+

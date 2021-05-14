@@ -1,0 +1,72 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    {{ name }}さんの判断結果-BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+    {% load custum_filters_tags widget_tweaks %}
+    <h3 class="subtitle">新たな姓名を診断</h3>
+    <div class="d-flex flex-column justify-content align-items-center">
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div>
+            <form action="{% url 'newname:namejudge' %}" method="post" class="form-group">
+                <div class="field">
+                    <div class="row justify-content-center mt-3 mb-1">
+                        <div class="col-auto">
+                            <div class="row justify-content-center">
+                                <div class="col-7 col-sm input-group">
+                                    {{ form.lastname }}
+                                </div>
+                                <div class="col-7 col-sm input-group">
+                                    {{ form.firstname }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-2">
+                        <div class="col-12 justify-content-center input-group">
+                            {% for radio in form.sex %}
+                                <div class="input-group-prepend px-3">
+                                    <div class="input-group-text border-0 bg-transparent">
+                                        {{ radio.tag }}
+                                    </div>
+                                    {{ radio.choice_label }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% csrf_token %}
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="診断">
+                </div>
+                {% if form.non_field_errors %}
+                <div class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% include "./parts/lucky_parameter.html" %}
+    {% include "./parts/lucky_param_define_tab.html" %}
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

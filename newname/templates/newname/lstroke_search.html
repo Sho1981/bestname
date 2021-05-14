@@ -1,0 +1,218 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    診断結果-BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+{% load widget_tweaks custum_filters_tags %}
+<div class="container">
+    <h3 class="subtitle col-auto">
+        良い運勢の画数検索
+    </h3>
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8">
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <form method="POST" class="form-group">
+                <div class="d-flex flex-column mx-sm-5 mx-3">
+                    <div class="d-flex justify-content-center align-items-center flex-wrap">
+                            <div class="col-9 col-sm-5 mb-3 input-group">
+                                {{ form.lastname }}
+                            </div>
+                            <div class="col-9 col-sm-5 mb-3 input-group">
+                                {% for radio in form.sex %}
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text border-0 bg-transparent">
+                                        {{ radio.tag }}
+                                        </div>
+                                        {{ radio.choice_label }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-sm input-group">
+                            ● {{ form.select_luckyelem.label }}
+                            <div class="col-4 col-sm-3 input-group">
+                                <label>
+                                    <input type="checkbox" id="checkAll">
+                                    全選択
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start flex-wrap">
+                        {% for choice in form.select_luckyelem %}
+                            <div class="col-4 col-sm-3 input-group">
+                                {{ choice }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm">
+                            ● {{ form.choice_type.label }}
+                            <div class="d-flex align-items-center input-group my-3">
+                                {% for radio in form.choice_type %}
+                                    <div class="input-group-prepend px-2">
+                                        <div class="input-group-text border-0 bg-transparent">
+                                            {{ radio.tag }}
+                                        </div>
+                                        {{ radio.choice_label }}
+                                    </div>
+                                {% endfor %}
+                                <div class="mx-2">
+                                {{ form.choice_num|add_class:'form-control' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        {{ form.choice_unlucky }}
+                        {{ form.choice_unlucky.label }}
+                    </div>
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-center">
+                        <input id="btn-1st" type="submit" class="btn btn-primary btn-lg my-3" value="検索">
+                    </div>
+                    {% if form.non_field_errors %}
+                    <div class="errorlist">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% for key, lucky_table in lucky_tables.items %}
+    <h3 class="subtitle">
+        {{ key }}
+    </h3>
+    <div class="row justify-content-md-center mx-sm-3 mx-0">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="align-middle" style="width: 68px;">
+                            名の文字数
+                        </th>
+                        <th scope="col" class="align-middle">
+                            画数の組み合わせ一覧<br>
+                            （例：『太郎』→（4画、9画））
+                        </th>
+                    </tr>
+                </thead>
+                {% for num, strokes_list in lucky_table.items %}
+                <thead>
+                    <tr>
+                        <td scope="row">
+                            {{ num }}文字
+                        </td>
+                        <td>
+                            <div class="d-none d-sm-block">
+                                <div class="d-flex flex-wrap">
+                                    {% if strokes_list %}
+                                        {% for strokes in strokes_list %}
+                                            {% if forloop.counter < 20 %}
+                                                <div class="p-1">
+                                                    <a href="/newname/{{ name|make_url_lstroke_result:strokes }}/lstroke_result/">
+                                                        ({% for stroke in strokes %}{{ stroke }}画{% if not forloop.last %}、{% endif %}{% endfor %})
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if forloop.counter >= 20 %}
+                                                <div class="p-1 others{{num}}" style="display:none;">
+                                                    <a href="/newname/{{ name|make_url_lstroke_result:strokes }}/lstroke_result/">
+                                                        ({% for stroke in strokes %}{{ stroke }}画{% if not forloop.last %}、{% endif %}{% endfor %})
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if strokes_list|length > 20 %}
+                                            <input id="btn-dp{{num}}" type="button" class="btn btn-outline-info btn-sm mx-2 my-1" value="他の組合せを全て表示" onclick="clickBtn1({{num}})" />
+                                        {% endif %}
+                                    {% else %}
+                                        なし
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="d-block d-sm-none">
+                                <div class="d-flex flex-wrap">
+                                    {% if strokes_list %}
+                                        {% for strokes in strokes_list %}
+                                            {% if forloop.counter < 10 %}
+                                                <div class="p-1">
+                                                    <a href="/newname/{{ name|make_url_lstroke_result:strokes }}/lstroke_result/">
+                                                        ({% for stroke in strokes %}{{ stroke }}画{% if not forloop.last %},{% endif %}{% endfor %})
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                <div class="p-1 others{{num}}" style="display:none;">
+                                                    <a href="/newname/{{ name|make_url_lstroke_result:strokes }}/lstroke_result/">
+                                                        ({% for stroke in strokes %}{{ stroke }}画{% if not forloop.last %},{% endif %}{% endfor %})
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if strokes_list|length >= 10 %}
+                                            <div>
+                                                <input id="btn-dp{{num}}" type="button" class="btn btn-outline-info btn-sm mx-2 my-1" value="他の組合せを全て表示" onclick="clickBtn1({{num}})" />
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        なし
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    function clickBtn1(num){
+        let classname = "others"+num;
+        let btnid = "btn-dp"+num;
+        const others = document.getElementsByClassName(classname);
+        const btn = document.getElementById(btnid);
+
+        if(others[0].style.display=="block"){
+            // noneで非表示
+            for (let i = 0; i < others.length; i++) {
+                others[i].style.display ="none";
+            }
+            btn.value = "他の組合せを全て表示";
+        }
+        else{
+            // blockで表示
+            for (let i = 0; i < others.length; i++) {
+                others[i].style.display ="block";
+            }
+            btn.value = "一部を非表示";
+        }
+    }
+</script>
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

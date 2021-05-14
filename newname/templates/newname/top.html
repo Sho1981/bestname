@@ -1,0 +1,97 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    Best Name!
+{% endblock %}
+
+{% block header %}
+{% load widget_tweaks %}
+<div class="container-fluid jumbotron jumbotron-extend row pt-0 px-2 mx-0">
+    <div class="col-md-12 align-self-start px-0">
+        {% include "./parts/header.html" %}
+    </div>
+    <div class="col-md-12 align-self-start text-center" style="height: 300px;">
+        <div>
+            <h1>Best Name!</h1>
+            <p class="title">～産まれてくる子どものための姓名判断～</p>
+        </div>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div>
+            <form action="{% url 'newname:namejudge' %}" method="post" class="form-group">
+                <div class="field">
+                    <div class="row justify-content-center mt-3 mb-3">
+                        <div class="col-auto">
+                            <div class="row justify-content-center">
+                                <div class="col-7 col-sm input-group">
+                                    {{ form.lastname }}
+                                </div>
+                                <div class="col-7 col-sm input-group">
+                                    {{ form.firstname }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-3">
+                        <div class="col-12 justify-content-center input-group">
+                            {% for radio in form.sex %}
+                                <div class="input-group-prepend px-3">
+                                    <div class="input-group-text border-0 bg-transparent">
+                                        {{ radio.tag }}
+                                    </div>
+                                    {{ radio.choice_label }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary btn-lg" value="診断">
+                {% if form.non_field_errors %}
+                <div class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>       
+</div>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h5 class="px-3" style="color:rgb(165, 99, 99);">
+            赤ちゃんに素敵な名前をつけたい！<br>
+            でも縁起のいい名前をつけてあげたい！
+            
+        </h5>
+        <p class="px-3 pt-3">
+            子どもに名付ける時、誰もがそう思いますよね？
+            でも運勢を調べながら、素敵だなと思う漢字を選ぶには、
+            漢字辞典と姓名判断サイトを行ったり来たりと一苦労・・・
+        </p>
+        <h5 class="px-3 pt-3" style="color:rgb(165, 99, 99);">
+            <ins>『BestName』は、そんな命名・名付けで悩まれているお父さん、お母さんのための、姓名判断支援サイトです。</ins>
+        </h5>
+        <p class="px-3 pt-3">
+            姓名を入力しての姓名判断だけでなく、名字に合う画数や、漢字の検索など、命名・名付けに関して便利な機能を集約しています。
+            命名・名付けだけでなく、筆名（ペンネーム）、芸名、改名をお考えの際にもご活用頂けます。
+            ぜひ『BestName』を使って貴方の大切な赤ちゃんに素敵なお名前をつけてあげましょう。
+        </p>
+        <p class="px-3 pt-3">
+            他にもこんな機能を追加してほしい！などありましたら、<a href="{% url 'newname:contact_form' %}">問い合わせフォーム</a>からご連絡ください。
+        </p>
+    </div>
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}

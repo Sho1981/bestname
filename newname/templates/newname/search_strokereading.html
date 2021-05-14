@@ -1,0 +1,110 @@
+{% extends "./parts/base.html" %}
+
+{% block title %}
+    診断結果-BestName
+{% endblock %}
+
+{% block header %}
+    {% include "./parts/header.html" %}
+{% endblock %}
+
+{% block main %}
+{% load widget_tweaks custum_filters_tags %}
+<div class="container">
+    <h3 class="subtitle">
+        読み・画数検索
+    </h3>
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8">
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <form method="POST" class="form-group">
+                <div class="d-flex flex-column mx-sm-5 mx-3">
+                    <div class="d-flex justify-content-sm-center align-items-center flex-wrap">
+                        <div class="col-12 col-sm-7 mb-3 align-items-center input-group">
+                            {{ form.reading }}
+                            　※部分一致
+                        </div>
+                        <div class="col-6 col-sm-4 mb-3 align-items-center input-group">
+                            {{ form.select_stroke.label }}　{{ form.select_stroke|add_class:'form-control' }}
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-sm input-group">
+                            ● {{ form.select_type.label }}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-sm-center flex-wrap">
+                        {% for choice in form.select_type %}
+                            <div class="col-6 col-sm-3 input-group">
+                                {{ choice }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="btn btn-primary btn-lg my-3" value="検索">
+                    </div>
+                    {% if form.non_field_errors %}
+                    <div class="errorlist">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% if reading or stroke %}
+    <h3 class="subtitle">
+        検索結果
+    </h3>
+    <div class="row justify-content-md-center mx-sm-3 mx-1">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="align-middle">
+                            {% if reading %}読み『{{ reading }}』を含む{% endif %}{% if stroke %}{{ choice_stroke }}画の{% endif %}文字
+                        </th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-wrap">
+                                {% if kanji_list %}
+                                    {% for kanji in kanji_list %}
+                                        <div class="p-1">
+                                            <a href="/newname/kanjisearch/figure/{{ kanji }}/">
+                                                <span style="font-size:1.2rem;">{{ kanji }}</span>
+                                            </a>
+                                        </div>
+                                    {% endfor %}                                
+                                {% else %}
+                                    なし
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar-left %}
+    {% include "./parts/left.html" %}
+{% endblock %}
+
+{% block sidebar-right %}
+    Ads
+{% endblock %}
+
+{% block footer %}
+    {% include "./parts/footer.html" %}
+{% endblock %}
