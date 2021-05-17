@@ -7,3 +7,5 @@ myconda
 .DS_Store
 .env
 db.sqlite3
+local_settings.py
+get_random_secret_key.py
