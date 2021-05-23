@@ -30,7 +30,18 @@ SECRET_KEY = env.get_value('DJANGO_SECRET_KEY', str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.get_value('DEBUG', bool)
 
-ALLOWED_HOSTS = []
+TEMPLATE_DEBUG = DEBUG
+
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['*']
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets")
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_HOST = env.get_value('EMAIL_HOST_NAME', str)
 EMAIL_HOST_USER = env.get_value('EMAIL_HOST_USER_NAME', str)
@@ -90,7 +101,7 @@ WSGI_APPLICATION = 'bestname.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
