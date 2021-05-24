@@ -13,6 +13,7 @@ from .constants import TABLE
 
 # Create your views here.
 
+
 class TopView(TemplateView):
     template_name = "newname/top.html"    
     def get_context_data(self, **kwargs):
