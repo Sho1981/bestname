@@ -13,7 +13,6 @@ from .constants import TABLE
 
 # Create your views here.
 
-
 class TopView(TemplateView):
     template_name = "newname/top.html"    
     def get_context_data(self, **kwargs):
@@ -50,7 +49,7 @@ class LparamResultView(TemplateView):
                             'key' : 'lparam'}
             else:
                 context = { 'form' : forms.NameForm(),
-                        'error_message' : 'エラー：無効な文字が入力されました。'}
+                        'error_message' : 'エラー：名前に使用できない文字が入力されました。'}
                 self.template_name = 'newname/top.html'               
         except:
             context = { 'form' : forms.NameForm(),

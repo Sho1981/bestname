@@ -30,7 +30,7 @@ class Name(models.Model):
     
     def available(self):
         nb = 1
-        for kanji in (self.l_kanjidata + self.f_kanjidata):
+        for kanji in self.f_kanjidata:
             nb *= kanji.namable()
         return bool(nb)
 

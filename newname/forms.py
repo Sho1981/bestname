@@ -40,8 +40,8 @@ class NameForm(forms.Form):
         for char in last:
             try:
                 k = Kanjidata.objects.get(figure = char)
-                if not(k.namable()):
-                    msgs.append(forms.ValidationError('『%s』は姓に使用できない文字です。' % char))
+#                if not(k.namable()):
+#                    msgs.append(forms.ValidationError('『%s』は姓に使用できない文字です。' % char))
             except:
                 msgs.append(forms.ValidationError('姓に無効な文字が使われています。'))
                 break
